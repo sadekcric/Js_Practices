@@ -1,3 +1,4 @@
+// employ Object
 const employ = [
   {
     id: "001",
@@ -19,6 +20,7 @@ const employ = [
   },
 ];
 
+// All Department Collection
 const departmentCollection = [
   {
     id: "004",
@@ -30,6 +32,7 @@ const departmentCollection = [
   },
 ];
 
+//All Employs By the Department
 const departmentFunc = (employArr, department) => {
   const findDepartment = departmentCollection?.find((dep) => dep?.name === department);
 
@@ -38,5 +41,28 @@ const departmentFunc = (employArr, department) => {
   return departmentEmploys;
 };
 
-const management = departmentFunc(employ, "account");
-console.log(management);
+// Dom Manipulation
+const inputDepartmentSearch = document.getElementById("searchDepId");
+const employs = document.getElementById("allEmploy");
+
+document.getElementById("searchBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  // call all employs by the search specific Department
+  const department = departmentFunc(employ, inputDepartmentSearch.value);
+
+  let content = "";
+
+  department.forEach((dep) => {
+    content += `
+      <div>
+        <p>name:${dep.name}</p>
+        <p>salary: ${dep.salary}</p>
+      </div>
+    `;
+  });
+
+  // By the Search Result show in display
+
+  employs.innerHTML = content;
+});
